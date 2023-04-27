@@ -1,0 +1,95 @@
+<meta charset="UTF-8">
+
+<h1>Site da adivinhação!</h1>
+
+<input/>
+<button>Pressione aqui</button>
+
+<script>
+
+var input = document.querySelector("input");
+input.focus();
+
+var numerosSecretos = sorteiaNumeros(10);
+
+console.log(numerosSecretos);
+
+function sorteia(){
+
+	return Math.round(Math.random() * 10);
+
+}
+
+function sorteiaNumeros (quantidade){
+
+	var numerosDesconhecidos = [];
+	
+	var numerosGerados = 1;
+
+		
+	while(numerosGerados <= quantidade) {
+
+		var numeroAleatorio = sorteia();
+		var achou = false
+
+			if(numeroAleatorio !== 0){
+
+				for(var posicao = 0 ; posicao < numerosDesconhecidos.length ; posicao++){
+
+					if(numerosDesconhecidos[posicao] == numeroAleatorio) {
+
+						achou = true
+						break;
+					}
+				}
+			
+				if(achou == false){
+
+				numerosDesconhecidos.push(numeroAleatorio);
+				numerosGerados++
+				
+				}
+			}
+
+			
+	}
+
+
+	return numerosDesconhecidos;
+
+}
+
+
+function verifica() {
+
+	var achou = false
+
+	for(var posicao = 0; posicao < numerosSecretos.length; posicao++)
+
+	if (input.value == numerosSecretos[posicao]) {
+
+		alert("Parabéns, você acertou o numero secreto.");
+		achou = true;
+		break;
+
+	}
+	if(achou == false){	
+	
+	alert("Não foi dessa vez, tente novamente.");
+
+	}
+
+
+	input.value = "";
+	input.focus();
+}
+
+
+
+
+
+var botao = document.querySelector("button");
+botao.onclick = verifica;
+
+
+</script>

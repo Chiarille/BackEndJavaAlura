@@ -1,0 +1,55 @@
+<canvas width="600" height="400" ></canvas>
+<script>
+	var tela = document.querySelector("canvas");
+	var pincel = tela.getContext("2d");
+
+	var r= 10;
+	var xAleatorio;
+	var yAleatorio;
+
+	function desenhaCirculo(x, y, r, cor){
+		pincel.fillStyle = cor;
+		pincel.beginPath();
+		pincel.arc(x, y, r, 0, 2 * Math.PI);
+		pincel.fill();
+	}
+	
+	function desenhaAlvo(x, y){
+		desenhaCirculo(x, y, r + 20 , "red");
+		desenhaCirculo(x, y, r + 10, "white");
+		desenhaCirculo(x, y, r, "red")		
+	}
+	
+	function sorteiaPosicao(maximo){
+		return Math.floor(Math.random() * maximo)
+	}
+	
+	function limpaTela(){
+		pincel.clearRect(0, 0, 600, 400);
+	}
+
+	function atualizaTela() {
+		limpaTela();
+		xAleatorio = sorteiaPosicao(600);
+		yAleatorio = sorteiaPosicao(400);
+		desenhaAlvo(xAleatorio, yAleatorio);
+	}
+
+	function atira(evento){
+	var x = evento.pageX - tela.offsetLeft;
+	var y = evento.pageY - tela.offsetTop;
+	if(x < xAleatorio + r
+		&& x > xAleatorio - r
+		&& y < yAleatorio + r
+		&& y > yAleatorio - r){
+		alert("Na mosca!")
+	}
+	
+	}
+
+	setInterval(atualizaTela, 500);
+	tela.onclick = atira;
+
+
+
+</script>

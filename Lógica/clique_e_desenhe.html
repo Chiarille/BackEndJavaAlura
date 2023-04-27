@@ -1,0 +1,48 @@
+<canvas width="600" height="400"></canvas>
+Escolha uma cor <input type="color">
+
+<script>
+    var tela = document.querySelector("canvas");
+    var pincel = tela.getContext("2d");
+    pincel.fillStyle = "grey";
+    pincel.fillRect(0, 0, 600, 400);
+    var cor = document.querySelector("input")
+    var r = 10
+
+    var desenha = false;
+
+    function desenhaCirculo(evento) {
+
+        if(desenha){
+        var x = evento.pageX - tela.offsetLeft;
+        var y = evento.pageY - tela.offsetTop;
+        pincel.fillStyle = cor.value;
+        pincel.beginPath();
+        pincel.arc(x, y, r, 0, 2 * 3.14);
+        pincel.fill();
+        console.log(x + "," + y);
+        }
+        if(evento.shiftKey && r + 10 <= 40){
+            r = r + 10;
+         }
+        if(evento.altKey && r - 5 >= 10 ){
+        r = r - 5;
+        }
+        
+    }
+
+    tela.onmousemove = desenhaCirculo;
+
+    function habilitaDesenho(){
+        desenha = true;
+    }
+
+    function desabilitaDesenho(){
+        desenha = false;
+    }
+
+    tela.onmousedown = habilitaDesenho;
+    tela.onmouseup = desabilitaDesenho;
+
+
+</script>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+	<html lang="pt-BR">
+	<meta charset="UTF-8">
+
+	<script>
+
+		function pulaLInha() {
+			
+			document.write("<br>");
+		}
+		function mostra(texto) {
+			
+			document.write(texto);
+			pulaLInha();
+		}
+
+		var numeroPensado = parseInt(Math.round(Math.random() * 10))
+
+		console.log(numeroPensado)
+
+		var tentativa = 1;
+		
+		while(tentativa <= 3){
+
+			var chute = parseInt(prompt("Digite um número: "))
+
+			if(numeroPensado == chute){
+
+				mostra("Parabéns, você acertou numero pensado foi: " + numeroPensado)
+				break;
+			
+			}else{
+				if(tentativa == 3){
+
+					alert("Que pena, você errou as 3 tentativas, o numero pensado foi: " + numeroPensado);
+					alert("Mas não desista, atualize á pagina e tente novamente!");
+				}
+
+			mostra("Que pena, não foi dessa vez, tente novamente!")
+		
+			}
+			tentativa++;
+		}
+	</script>
